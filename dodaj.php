@@ -2,7 +2,8 @@
 require('db.php');
 include("sesja.php");
 if(isset($_POST['nowywpis']) && $_POST['nowywpis']==1){
-$query=mysqli_query($con,"SELECT * FROM users WHERE ban = 1");
+$uzytkownik=$_SESSION['uzytkownik'];
+$query=mysqli_query($con,"SELECT * FROM users WHERE ban = 1 && `uzytkownik` = '$uzytkownik'");
 $num_rows = mysqli_num_rows($query);
 if ($num_rows == 0){
     $rodzaj =$_REQUEST['rodzaj'];
@@ -12,10 +13,10 @@ if ($num_rows == 0){
     mysqli_query($con,"insert into ksiazkifilmy
     (`rodzaj`, `nazwa`,`opis`,`autor`)values
     ('$rodzaj','$nazwa','$opis','$autor')");
-    echo "<div class='form'>
+    echo "<div class='main'>
 <h3>Dodano pomyślnie</h3></div>";
 	}
-	else echo "<div class='form'>
+	else echo "<div class='main'>
 	<h3>Ban na dodawanie</h3></div>";
 }
 ?>
@@ -38,7 +39,7 @@ if ($num_rows == 0){
 </select></p>
 <p><input type="text" name="nazwa" placeholder="Nazwa" required /></p>
 <p><input type="text" name="opis" maxlength="10" placeholder="Opis[max długość 10 znaków]"/></p>
-<p><input name="submit" type="submit" value="Submit" /></p>
+<p><input name="submit" type="submit" value="Dodaj" /></p>
 </form>
 </div>
 </div>

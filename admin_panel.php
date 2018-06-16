@@ -3,10 +3,11 @@ require('db.php');
 include("sesja.php");
 
 ?>
-
 <?php
-$query=mysqli_query($con,"SELECT * FROM users WHERE admin = 1");
+$uzytkownik=$_SESSION['uzytkownik'];
+$query=mysqli_query($con,"SELECT * FROM `users` WHERE `admin` = 1 && `uzytkownik` = '$uzytkownik'");
 $num_rows = mysqli_num_rows($query);
+
 if ($num_rows == 1){ ?>
         <html>
 <head>

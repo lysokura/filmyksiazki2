@@ -13,7 +13,8 @@
 require('db.php');
 include("sesja.php");
 if(isset($_POST['nowywpis']) && $_POST['nowywpis']==1){
-$query=mysqli_query($con,"SELECT * FROM users WHERE admin = 1");
+$uzytkownik=$_SESSION['uzytkownik'];
+$query=mysqli_query($con,"SELECT * FROM `users` WHERE `admin` = 1 && `uzytkownik` = '$uzytkownik'");
 $num_rows = mysqli_num_rows($query);
 if ($num_rows == 1){
     $rodzaj =$_REQUEST['rodzaj'];
